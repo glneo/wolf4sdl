@@ -1,6 +1,4 @@
-CONFIG ?= config.default
--include $(CONFIG)
-
+CFLAGS += -O2
 
 BINARY    ?= wolf3d
 PREFIX    ?= /usr/local
