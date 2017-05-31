@@ -72,7 +72,7 @@ static int GetCloudSkyDefID()
 
 #else
 
-static int GetCloudSkyDefID()
+int GetCloudSkyDefID()
 {
     int skyID;
     switch(gamestate.episode * 10 + mapon)
