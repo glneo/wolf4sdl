@@ -95,19 +95,22 @@
 //
 // TYPEDEFS
 //
-typedef struct {
-                short x,y,amount,curpos,indent;
-                } CP_iteminfo;
+typedef struct
+{
+	short x, y, amount, curpos, indent;
+} CP_iteminfo;
 
-typedef struct {
-                short active;
-                char string[36];
-                int (* routine)(int temp1);
-                } CP_itemtype;
+typedef struct
+{
+	short active;
+	char string[36];
+	int (* routine)(int temp1);
+} CP_itemtype;
 
-typedef struct {
-                short allowed[4];
-                } CustomCtrls;
+typedef struct
+{
+	short allowed[4];
+} CustomCtrls;
 
 extern CP_itemtype MainMenu[];
 extern CP_iteminfo MainItems;
@@ -124,18 +127,18 @@ void SetupControlPanel(void);
 void SetupSaveGames();
 void CleanupControlPanel(void);
 
-void DrawMenu(CP_iteminfo *item_i,CP_itemtype *items);
+void DrawMenu(CP_iteminfo *item_i, CP_itemtype *items);
 int  HandleMenu(CP_iteminfo *item_i,
                 CP_itemtype *items,
                 void (*routine)(int w));
 void ClearMScreen(void);
-void DrawWindow(int x,int y,int w,int h,int wcolor);
-void DrawOutline(int x,int y,int w,int h,int color1,int color2);
+void DrawWindow(int x, int y, int w, int h, int wcolor);
+void DrawOutline(int x, int y, int w, int h, int color1, int color2);
 void WaitKeyUp(void);
 void ReadAnyControl(ControlInfo *ci);
 void TicDelay(int count);
-void CacheLump(int lumpstart,int lumpend);
-void UnCacheLump(int lumpstart,int lumpend);
+void CacheLump(int lumpstart, int lumpend);
+void UnCacheLump(int lumpstart, int lumpend);
 int StartCPMusic(int song);
 int  Confirm(const char *string);
 void Message(const char *string);
@@ -144,10 +147,10 @@ void ShootSnd(void);
 void CheckSecretMissions(void);
 void BossKey(void);
 
-void DrawGun(CP_iteminfo *item_i,CP_itemtype *items,int x,int *y,int which,int basey,void (*routine)(int w));
-void DrawHalfStep(int x,int y);
-void EraseGun(CP_iteminfo *item_i,CP_itemtype *items,int x,int y,int which);
-void SetTextColor(CP_itemtype *items,int hlight);
+void DrawGun(CP_iteminfo *item_i, CP_itemtype *items, int x, int *y, int which, int basey, void (*routine)(int w));
+void DrawHalfStep(int x, int y);
+void EraseGun(CP_iteminfo *item_i, CP_itemtype *items, int x, int y, int which);
+void SetTextColor(CP_itemtype *items, int hlight);
 void DrawMenuGun(CP_iteminfo *iteminfo);
 void DrawStripes(int y);
 
@@ -155,7 +158,7 @@ void DefineMouseBtns(void);
 void DefineJoyBtns(void);
 void DefineKeyBtns(void);
 void DefineKeyMove(void);
-void EnterCtrlData(int index,CustomCtrls *cust,void (*DrawRtn)(int),void (*PrintRtn)(int),int type);
+void EnterCtrlData(int index, CustomCtrls *cust, void (*DrawRtn)(int), void (*PrintRtn)(int), int type);
 
 void DrawMainMenu(void);
 void DrawSoundMenu(void);
@@ -176,7 +179,7 @@ void PrintCustJoy(int i);
 void PrintCustKeybd(int i);
 void PrintCustKeys(int i);
 
-void PrintLSEntry(int w,int color);
+void PrintLSEntry(int w, int color);
 void TrackWhichGame(int w);
 void DrawNewGameDiff(int w);
 void FixupCustom(int w);
@@ -200,38 +203,39 @@ void CheckForEpisodes(void);
 void FreeMusic(void);
 
 
-enum {MOUSE,JOYSTICK,KEYBOARDBTNS,KEYBOARDMOVE};        // FOR INPUT TYPES
+enum {MOUSE, JOYSTICK, KEYBOARDBTNS, KEYBOARDMOVE};     // FOR INPUT TYPES
 
 enum menuitems
 {
-        newgame,
-        soundmenu,
-        control,
-        loadgame,
-        savegame,
-        changeview,
+	newgame,
+	soundmenu,
+	control,
+	loadgame,
+	savegame,
+	changeview,
 
 #ifndef GOODTIMES
 #ifndef SPEAR
-        readthis,
+	readthis,
 #endif
 #endif
 
-        viewscores,
-        backtodemo,
-        quit
+	viewscores,
+	backtodemo,
+	quit
 };
 
 //
 // WL_INTER
 //
-typedef struct {
-                int kill,secret,treasure;
-                int32_t time;
-                } LRstruct;
+typedef struct
+{
+	int kill, secret, treasure;
+	int32_t time;
+} LRstruct;
 
 extern LRstruct LevelRatios[];
 
-void Write (int x,int y,const char *string);
+void Write (int x, int y, const char *string);
 void NonShareware(void);
-int GetYorN(int x,int y,int pic);
+int GetYorN(int x, int y, int pic);

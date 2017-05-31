@@ -16,7 +16,7 @@
 
 typedef struct
 {
-	int16_t width,height;
+	int16_t width, height;
 } pictabletype;
 
 
@@ -34,9 +34,9 @@ typedef struct
 extern	pictabletype	*pictable;
 extern	pictabletype	*picmtable;
 
-extern  byte            fontcolor,backcolor;
+extern  byte            fontcolor, backcolor;
 extern	int             fontnumber;
-extern	int             px,py;
+extern	int             px, py;
 
 #define SETFONTCOLOR(f,b) fontcolor=f;backcolor=b;
 
@@ -93,7 +93,7 @@ void    LoadLatchMem (void);
 
 void    VH_Startup();
 boolean FizzleFade (SDL_Surface *source, int x1, int y1,
-    unsigned width, unsigned height, unsigned frames, boolean abortable);
+                    unsigned width, unsigned height, unsigned frames, boolean abortable);
 
 #define NUMLATCHPICS	100
 extern	SDL_Surface *latchpics[NUMLATCHPICS];

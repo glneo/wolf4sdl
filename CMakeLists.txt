@@ -43,5 +43,5 @@ find_package(SDL_mixer REQUIRED)
 target_include_directories(wolf4sdl PUBLIC ${SDL_MIXER_INCLUDE_DIRS})
 target_link_libraries(wolf4sdl ${SDL_MIXER_LIBRARIES})
 
-target_compile_options(wolf4sdl PRIVATE -g;-ffast-math;-Wall)
+target_compile_options(wolf4sdl PRIVATE -g;-ffast-math)
 install(TARGETS wolf4sdl RUNTIME DESTINATION bin)
