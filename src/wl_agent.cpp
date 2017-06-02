@@ -107,15 +107,6 @@ void CheckWeaponChange (void)
 	if (!gamestate.ammo)            // must use knife with no ammo
 		return;
 
-#ifdef _arch_dreamcast
-	int joyx, joyy;
-	IN_GetJoyFineDelta (&joyx, &joyy);
-	if(joyx < -64)
-		buttonstate[bt_prevweapon] = true;
-	else if(joyx > 64)
-		buttonstate[bt_nextweapon] = true;
-#endif
-
 	if(buttonstate[bt_nextweapon] && !buttonheld[bt_nextweapon])
 	{
 		newWeapon = gamestate.weapon + 1;
@@ -178,9 +169,9 @@ void ControlMovement (objtype *ob)
 		if(angle >= ANGLES)
 			angle -= ANGLES;
 		if(buttonstate[bt_run])
-			Thrust(angle, RUNMOVE * MOVESCALE * tics);
+			Thrust(angle, RUNMOVE * MOVESCALE * tics * 0.6f);
 		else
-			Thrust(angle, BASEMOVE * MOVESCALE * tics);
+			Thrust(angle, BASEMOVE * MOVESCALE * tics * 0.6f);
 	}
 
 	if(buttonstate[bt_straferight])
@@ -189,9 +180,9 @@ void ControlMovement (objtype *ob)
 		if(angle < 0)
 			angle += ANGLES;
 		if(buttonstate[bt_run])
-			Thrust(angle, RUNMOVE * MOVESCALE * tics );
+			Thrust(angle, RUNMOVE * MOVESCALE * tics * 0.6f);
 		else
-			Thrust(angle, BASEMOVE * MOVESCALE * tics);
+			Thrust(angle, BASEMOVE * MOVESCALE * tics * 0.6f);
 	}
 
 	//
@@ -280,10 +271,6 @@ void StatusDrawPic (unsigned x, unsigned y, unsigned picnum)
 void StatusDrawFace(unsigned picnum)
 {
 	StatusDrawPic(17, 4, picnum);
-
-#ifdef _arch_dreamcast
-	DC_StatusDrawLCD(picnum);
-#endif
 }
 
 

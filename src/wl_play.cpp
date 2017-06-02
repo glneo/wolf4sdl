@@ -56,13 +56,8 @@ int buttonscan[NUMBUTTONS] = { sc_Control, sc_Alt, sc_LShift, sc_Space, sc_1, sc
 int buttonmouse[4] = { bt_attack, bt_strafe, bt_use, bt_nobutton };
 int buttonjoy[32] =
 {
-#ifdef _arch_dreamcast
-	bt_attack, bt_strafe, bt_use, bt_run, bt_esc, bt_prevweapon, bt_nobutton, bt_nextweapon,
-	bt_pause, bt_strafeleft, bt_straferight, bt_nobutton, bt_nobutton, bt_nobutton, bt_nobutton, bt_nobutton,
-#else
 	bt_attack, bt_strafe, bt_use, bt_run, bt_strafeleft, bt_straferight, bt_esc, bt_pause,
 	bt_prevweapon, bt_nextweapon, bt_nobutton, bt_nobutton, bt_nobutton, bt_nobutton, bt_nobutton, bt_nobutton,
-#endif
 	bt_nobutton, bt_nobutton, bt_nobutton, bt_nobutton, bt_nobutton, bt_nobutton, bt_nobutton, bt_nobutton,
 	bt_nobutton, bt_nobutton, bt_nobutton, bt_nobutton, bt_nobutton, bt_nobutton, bt_nobutton, bt_nobutton
 };
@@ -213,7 +208,7 @@ int songs[] =
 	XFUNKIE_MUS,
 	XDEATH_MUS,
 	XGETYOU_MUS,                // DON'T KNOW
-	ULTIMATE_MUS,               // Trans Gr”sse
+	ULTIMATE_MUS,               // Trans Grï¿½sse
 
 	DUNGEON_MUS,
 	GOINGAFT_MUS,
@@ -306,6 +301,26 @@ void PollJoystickButtons (void)
 	}
 }
 
+/*
+===================
+=
+= PollKeyboardMoveStrafe
+=
+===================
+*/
+void PollKeyboardMoveStrafe(void)
+{
+	int delta = buttonstate[bt_run] ? RUNMOVE * tics : BASEMOVE * tics;
+
+	if (Keyboard[dirscan[di_north]])
+		controly -= delta;
+	if (Keyboard[dirscan[di_south]])
+		controly += delta;
+	if (Keyboard[dirscan[di_west]])
+		buttonstate[bt_strafeleft] = true;
+	if (Keyboard[dirscan[di_east]])
+		buttonstate[bt_straferight] = true;
+}
 
 /*
 ===================
@@ -350,7 +365,7 @@ void PollMouseMove (void)
 	mouseymove -= screenHeight / 2;
 
 	controlx += mousexmove * 10 / (13 - mouseadjustment);
-	controly += mouseymove * 20 / (13 - mouseadjustment);
+//	controly += mouseymove * 20 / (13 - mouseadjustment);
 }
 
 
@@ -466,7 +481,10 @@ void PollControls (void)
 //
 // get movements
 //
-	PollKeyboardMove ();
+	if (mouseenabled && IN_IsInputGrabbed())
+		PollKeyboardMoveStrafe ();
+	else
+		PollKeyboardMove ();
 
 	if (mouseenabled && IN_IsInputGrabbed())
 		PollMouseMove ();

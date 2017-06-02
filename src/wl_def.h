@@ -11,10 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#if defined(_arch_dreamcast)
-#	include <string.h>
-#	include "dc/dc_main.h"
-#elif !defined(_WIN32)
+#if !defined(_WIN32)
 #	include <stdint.h>
 #	include <string.h>
 #	include <stdarg.h>
@@ -27,10 +24,7 @@
 
 #pragma pack(1)
 
-#if defined(_arch_dreamcast)
-#define YESBUTTONNAME "A"
-#define NOBUTTONNAME  "B"
-#elif defined(GP2X)
+#if defined(GP2X)
 #define YESBUTTONNAME "Y"
 #define NOBUTTONNAME  "B"
 #else
@@ -41,20 +35,20 @@
 #include "foreign.h"
 
 #ifndef SPEAR
-#include "audiowl6.h"
-#ifdef UPLOAD
-#include "gfxv_apo.h"
+	#include "audiowl6.h"
+	#ifdef UPLOAD
+		#include "gfxv_apo.h"
+	#else
+		#ifdef GOODTIMES
+			#include "gfxv_wl6.h"
+		#else
+			#include "gfxv_apo.h"
+		#endif
+	#endif
 #else
-#ifdef GOODTIMES
-#include "gfxv_wl6.h"
-#else
-#include "gfxv_apo.h"
-#endif
-#endif
-#else
-#include "audiosod.h"
-#include "gfxv_sod.h"
-#include "f_spear.h"
+	#include "audiosod.h"
+	#include "gfxv_sod.h"
+	#include "f_spear.h"
 #endif
 
 typedef uint8_t byte;
@@ -1349,26 +1343,6 @@ extern  char    helpfilename[], endfilename[];
 
 extern  void    HelpScreens(void);
 extern  void    EndText(void);
-
-
-/*
-=============================================================================
-
-                               GP2X DEFINITIONS
-
-=============================================================================
-*/
-
-#if defined(GP2X)
-
-#if defined(GP2X_940)
-void GP2X_MemoryInit(void);
-void GP2X_Shutdown(void);
-#endif
-void GP2X_ButtonDown(int button);
-void GP2X_ButtonUp(int button);
-
-#endif
 
 
 /*
